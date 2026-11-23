@@ -77,3 +77,81 @@ A clean test environment can start the prototype using
 - How is a feasible journey defined?
 - What information is mandatory in the results?
 - How are missing data and outdated snapshots handled?
+
+## 5. Proposed Acceptance Test Cases
+
+The following test cases are planned and have not
+yet been executed.
+
+### TC-06: Valid Travel Window
+Related Requirement: FR-01
+
+Input:
+- Starting location: Frankfurt Hbf
+- Departure: November 28, 2026, 19:00
+- Return deadline: November 29, 2026, 01:30
+
+Expected Result:
+The system accepts the input as a valid travel window.
+
+### TC-07: Missing Starting Location
+Related Requirement: FR-01
+
+Input:
+- Starting location: Not specified
+- Departure: November 28, 2026, 19:00
+- Return deadline: November 29, 2026, 01:30
+
+Expected Result:
+The system rejects the request and displays
+a clear validation message.
+
+### TC-08: Invalid Travel Window
+Related Requirement: FR-01
+
+Input:
+- Departure: November 28, 2026, 19:00
+- Return deadline: November 28, 2026, 18:00
+
+Expected Result:
+The system rejects the invalid travel window.
+
+### TC-09: Reproducible Results
+Related Requirement: NFR-01
+
+Input:
+Two identical requests using the same data snapshot.
+
+Expected Result:
+Both requests return identical destinations,
+journey details, scores, and ranking order.
+
+### TC-10: Display of Recommendation Details
+Related Requirement: FR-06
+
+Input:
+A predefined test destination with a feasible
+outbound and return journey.
+
+Expected Result:
+The interface displays the destination name,
+sky darkness, cloud cover, travel times,
+walking information, outbound and return trips,
+and the snapshot timestamp.
+
+### TC-11: Offline Prototype Startup
+Related Requirement: NFR-03
+
+Precondition:
+The required Docker environment is installed.
+
+Steps:
+1. Disable access to live third-party services.
+2. Run `docker compose up`.
+3. Execute the predefined sample scenario.
+
+Expected Result:
+The application starts successfully and processes
+the sample scenario without external API calls
+or API keys.
+
